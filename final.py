@@ -1,7 +1,10 @@
 import json
 import webbrowser
+import urllib
+import requests
 
 #API key d8aa257457ec1e26187f1410aaa7b258
+api_key = 'd8aa257457ec1e26187f1410aaa7b258'
 print('welcome to the program')
 print('we are here to help you with all your weather related needs')
 
@@ -38,10 +41,14 @@ def add_more():
         print()
         add_more()
 
+def connect
+
 quit_list = ['quit', 'q', 'end', 'no', 'n']
 yes_list = ['yes', 'yeah', 'y', 'ok', 'k']
 no_list = quit_list
 help_list = ['help', 'h']
+with open(USCIties.json) as f:
+    data = json.load(f)
 def main():
     while (True):
         menu_option = menu()
@@ -49,13 +56,27 @@ def main():
         if menu_option == 1:
             city = input('Which city would you like the weather for? ')
             state = input(f'Which state is {city} in (Please use the proper 2 letter abbreviation)? ')
+            if city and state in data['zips']:
+                #use api to get weather
+                #print weather
+                add_more()
 
-            add_more()
+            else:
+                print('Sorry, that city and state combination does not exist')
+                main()
+
 
         elif menu_option == 2:
+            zip_code = input('What is the Zip code you would like the weather for? ')
+            if zip_code in data['zips']
+                # use api to get weather
+                # print weather
+                add_more()
+            else:
+                print('Sorry, that city and state combination does not exist')
+                main()
 
 
-            add_more()
 
         elif menu_option.lower in help_list:
             help()
