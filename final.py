@@ -6,7 +6,7 @@ import requests
 print('welcome to the program')
 print('we are here to help you with all your weather related needs')
 
-def help:
+def help():
     if a.lower in help_list:
         print('To search by city and state please enter 1')
         print('to search by Zipcode please enter 2')
@@ -37,7 +37,7 @@ def add_more():
         print()
         print()
         add_more()
-def connect:
+def connect():
     website = 'http://https://openweathermap.org/'
     error_number = 0
     try:
@@ -52,12 +52,12 @@ def connect:
             print('We were unable to make a connection')
             add_more()
 
-def weather_data:
+def weather_data():
     #connection
     #read the text
     #save text to json
 
-def full_weather:
+def full_weather():
     # temp = json data specific key for temp
 
 api_key = 'd8aa257457ec1e26187f1410aaa7b258'
@@ -89,7 +89,7 @@ def main():
 
         elif menu_option == 2:
             zip_code = input('What is the Zip code you would like the weather for? ')
-            if zip_code in data['zips']
+            if zip_code in data['zips']:
                 if zip_code in data['zips']:
                     full_url = api_address + zip_code
                     weather_data()
