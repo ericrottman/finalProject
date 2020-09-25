@@ -3,8 +3,6 @@ import webbrowser
 import urllib
 import requests
 
-#API key d8aa257457ec1e26187f1410aaa7b258
-api_key = 'd8aa257457ec1e26187f1410aaa7b258'
 print('welcome to the program')
 print('we are here to help you with all your weather related needs')
 
@@ -19,18 +17,17 @@ def menu():
     print("[2] To Search by Zipcode")
     print("For HELP please type help")
     print("To QUIT please type  Quit")
+    # selection = input()
 
     return input('Which option would you like to select? ')
 
 def add_more():
-    again = input('Would you like to add another vehicle to your garage? ')
+    again = input('Would you like to search for the weather of another city? ')
     if again in yes_list:
         print()
         main()
     elif again in no_list:
-        print("Thanks for using the virtual garage builder.")
-        print('Your garage consists of:')
-        print(garage)
+        print("Thanks for using the Weather program.")
         print('Have a nice day!')
         quit()
     else:
@@ -40,9 +37,31 @@ def add_more():
         print()
         print()
         add_more()
+def connect:
+    website = 'http://https://openweathermap.org/'
+    error_number = 0
+    try:
+        r = requests.get(website)
+    except requests.exeptions.ConnectionError:
+        print('connection unsuccessful')
+        print('retrying up to 5 times')
+        error_number += 1
+        if error_number <= 5:
+            connect()
+        elif error_number > 5:
+            print('We were unable to make a connection')
+            add_more()
 
-def connect
+def weather_data:
+    #connection
+    #read the text
+    #save text to json
 
+def full_weather:
+    # temp = json data specific key for temp
+
+api_key = 'd8aa257457ec1e26187f1410aaa7b258'
+api_address = f'http://api.openweathermap.org/data/2.5/weather?appid={api_key}&q='
 quit_list = ['quit', 'q', 'end', 'no', 'n']
 yes_list = ['yes', 'yeah', 'y', 'ok', 'k']
 no_list = quit_list
@@ -57,8 +76,10 @@ def main():
             city = input('Which city would you like the weather for? ')
             state = input(f'Which state is {city} in (Please use the proper 2 letter abbreviation)? ')
             if city and state in data['zips']:
-                #use api to get weather
-                #print weather
+                full_url = api_address + city
+                weather_data()
+                full_weather()
+                print(temp)
                 add_more()
 
             else:
@@ -69,8 +90,11 @@ def main():
         elif menu_option == 2:
             zip_code = input('What is the Zip code you would like the weather for? ')
             if zip_code in data['zips']
-                # use api to get weather
-                # print weather
+                if zip_code in data['zips']:
+                    full_url = api_address + zip_code
+                    weather_data()
+                    full_weather()
+                    print(temp)
                 add_more()
             else:
                 print('Sorry, that city and state combination does not exist')
