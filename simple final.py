@@ -26,24 +26,19 @@ def add_more():
         add_more()
 
 
-# def connect():
-#     while True:
-#
-#         try:
-#             requests.get(url)
-#         except requests.ConnectionError:
-#             error_number = int(0)
-#             print('connection unsuccessful')
-#             print('retrying up to 5 times')
-#             error_number += 1
-#             print(er)
-#             if error_number <= 5:
-#                 connect()
-#             elif error_number > 5:
-#                 print('We were unable to make a connection')
-#                 print('Please check your connection and try again')
-#                 break
-#                 add_more()
+def connect():
+    r = requests.get('http://openweathermap.org')
+    print("connecting....")
+    for i in range(5):
+        try:
+            r.raise_for_status()
+        except requests.exceptions.ConnectionError:
+            print('we could not make a valid connection. Please try again')
+            print('trying again up to 5 times')
+        except requests.exceptions.HTTPError:
+            print('no connection')
+            print('trying again up to 5 times')
+
 #still in progress....
 def connect_2():
     url = 'http://openweathermap.org'
@@ -79,12 +74,16 @@ def main():
         print(f'What state is {city} in? (Please use the full state name)')
         state = input()
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city},{state}&appid={api_key}&units=imperial'
-        # connect_2()
+        connect()
         json_data = requests.get(url).json()
-        temp = json_data['main']['temp']
-        temp = round(temp, 0)
-        print(f'the weather for {city.capitalize()}, {state.capitalize()} is {temp} degrees Fahrenheit')
-        add_more()
+        if json_data['message'] == 'Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.':
+            print('we encountered an error.')
+            add_more()
+        else:
+            temp = json_data['main']['temp']
+            temp = round(temp, 0)
+            print(f'the weather for {city.capitalize()}, {state.capitalize()} is {temp} degrees Fahrenheit')
+            add_more()
 
     elif data_type == str(2):
         print('What is the Zip code of the city you would like the weather for?')
@@ -100,7 +99,7 @@ def main():
                 quit()
         elif len(zip_code) == 5:
             url = f'http://api.openweathermap.org/data/2.5/weather?zip={zip_code}&appid={api_key}&units=imperial'
-            # connect_2()
+            connect()
             json_data = requests.get(url).json()
             temp = json_data['main']['temp']
             temp = round(temp, 0)
